@@ -38,7 +38,7 @@ function like_count(args) {
 			output = addCommas(fans_to_goal);
 			target.innerHTML = output;
 		} else {
-			console.log('Unable to get like count.')
+			//console.log('Unable to get like count.')
 		}
 	});
 };
