@@ -8,6 +8,6 @@ A JavaScript snippet to allow the easy creation of a fan meter (visual represent
 Our traditional fan gate is only available on Facebook tabs but you can use these code samples to extend the same functionality across a canvas page or microsite. This method does require you get permission from the user to check their likes.  
 
 ## Coming soon
-Smart Image Thumbnail Creation
-Sliders from a Gallery Plugin
-Live (moving) Countdown from Countdown Plugin
+Smart Image Thumbnail Creation  
+Sliders from a Gallery Plugin  
+Live (moving) Countdown from Countdown Plugin  
