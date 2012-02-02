@@ -1,0 +1,38 @@
+/* CLEARFIX */
+.clearfix:after, .row:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix, .row { display:inline-block; }
+.clearfix, .row { display:block; }
+
+/* CUSTOM */
+html, body {
+	background-color:transparent;
+}
+
+.container { 
+	background:#FFF;
+	width:500px; /* TEMP */
+	margin:0 auto; 
+}
+
+/* Testing Styles Only */
+#status, #user_status {
+	margin:20px 0;
+	padding:7px 14px;
+	background:#FACCA2;
+	background: -moz-linear-gradient(top,  rgba(253,231,210,1) 0%, rgba(250,204,162,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(253,231,210,1)), color-stop(100%,rgba(250,204,162,1)));
+	background: -webkit-linear-gradient(top,  rgba(253,231,210,1) 0%,rgba(250,204,162,1) 100%);
+	background: -o-linear-gradient(top,  rgba(253,231,210,1) 0%,rgba(250,204,162,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(253,231,210,1) 0%,rgba(250,204,162,1) 100%);
+	background: linear-gradient(top,  rgba(253,231,210,1) 0%,rgba(250,204,162,1) 100%);
+	border:1px solid #F38F32;
+	font-size:15px;
+	text-align:center;
+	text-shadow:1px 1px 0 rgba(255,255,255,0.35);
+	color:#B55D0A;
+}
+
+#action {
+	margin:20px 0;
+}
+

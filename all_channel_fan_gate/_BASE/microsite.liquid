@@ -1,0 +1,161 @@
+<div class="container">
+	<div class="row">
+		<div id="status">If you see this for very long, something went wrong.</div>
+		<hr />
+		<div id="user_status"></div>
+		<hr />
+		<div id="action">
+			<h3>Examples of buttons:</h3>
+			<button id="login" onClick="javascript:user_login();">Login</button>
+			<button id="logout" onClick="javascript:FB.logout();">Logout</button>
+		</div>
+	</div>
+</div><!-- end .container -->
+
+<script type="text/javascript">
+/* ### Quick Checks ### */
+var user_status = 'unknown'; 	// Possible values are 'unknown', 'not_authorized' or 'connected'
+var user_auth 	= false; 		// user_auth differs from user_status because it is either true or false (false means either 'unknown' or 'not_authorized')
+var fan_of_page = false; 		// Fan or not fan - obviously
+
+/* ### HTML Pieces ### */
+var like_box = '<div id="like_box_wrap"><div id="like_box"><fb:like-box href="http://www.facebook.com/VEVO" width="200" show_faces="false" stream="false" header="true"></fb:like-box></div><div style="text-align:center;"><h4>You must \'Like\' VEVO to participate in this competition.</h4></div></div>';
+
+var login_button = '<div id="login_wrap"><div style="text-align:center;cursor:pointer;" onclick="user_login();"><img src="{{ "assets/login_button.png" | asset_url }}" alt="Log In with Facebook" /></div><div style="text-align:center;"><h4>Please ‘Log In With Facebook’ to participate in this competition.</h4></div></div>';
+
+/* Functions */
+function check_user_status() { 	// Called on load to test if the user is already connected
+	$('#status').html('Checking User Status');
+	$('#user_status').html('User Status: ' + user_status);
+	FB.getLoginStatus( function(response) {
+		if (response.status == "not_authorized") {
+			user_status = 'not_authorized';
+			user_auth = false;
+			$('#user_status').html('User Status: ' + user_status);
+		} else if (response.status == "connected") {
+			user_status = 'connected';
+			user_auth = true;
+			$('#user_status').html('User Status: ' + user_status);
+			
+			user_is_connected(); // Any actions to do upon
+			check_fan_status(); // Since we've got permissions, check if they're a fan.
+		} else if (response.status == "unknown") {
+			user_status = 'unknown';
+			user_auth = false;
+			$('#user_status').html('User Status: ' + user_status);
+		}
+	});
+};
+
+function check_fan_status() {
+	$('#status').html('Checking Fan Status');
+	// We need to manually set the fan page we want to check for
+	{% plugin rawtext fan_page_id %}
+    var page_id = '{{ fan_page_id }}'; // e.g. VEVO = 79544810932
+
+	// TODO - This function can almost certainly be replaced with something simpler.
+	function isEmpty(obj) {
+	    for (var prop in obj) {
+	        if (obj.hasOwnProperty(prop)) {
+	            return false;
+			}
+	    }
+	    return true;
+	}
+	
+	FB.api('/me/likes/' + page_id, function(response) {
+	    if (response.data) {
+	        if (!isEmpty(response.data)) {
+				user_auth = true;
+				fan_of_page = true;
+				
+				user_fan_of_page();
+	        } else {
+				user_auth = true;
+				fan_of_page = false;
+		
+				user_not_fan();
+			}
+	    } else {
+			// might be logged in but not authed
+			user_not_fan();
+	    }
+	});
+};
+
+function user_is_connected() {
+	$('#status').html('User is connected.');
+};
+
+function user_not_fan() {
+	// Callback for function to do if user is fan
+	$('#status').html('User is not a fan');
+};
+
+function user_fan_of_page() {
+	// Callback for function to do if user is not fan
+	$('#status').html('User is a fan');
+};
+
+function user_login() {
+	$('#status').html('Logging user in.');
+	FB.login(function(response) {
+		if (response.authResponse) {
+			user_auth = true;
+			user_status = 'connected';
+			$('#user_status').html('User Status: ' + user_status);
+			
+			check_fan_status();
+		} else {
+			// User cancelled or did not authorize
+			console.log('User did not complete login.');
+		}
+	});
+};
+
+$(document).ready(function() {
+	$('selector').click( function () {		
+		if (user_auth == true && fan_of_page == true) {
+			// User is logged in and has liked the page	
+
+		} else if (user_auth == true && fan_of_page == false) {
+			// User is logged in but hasn't liked the page yet
+						
+		} else if (user_auth == false && fan_of_page == false) {
+			// User needs to log in		
+
+		}
+	});
+});
+
+$(document).bind('afterfbinit', function () {
+	check_user_status();
+	
+	// This event is fired for any auth related change as they all affect the session: login, logout, session refresh.
+	FB.Event.subscribe('auth.authResponseChange', function(response) {
+		$('#status').html('There\'s been a change in the authResponse.');
+		
+		if (response.status == "not_authorized") {
+			user_status = 'not_authorized';
+			user_auth = false;
+			$('#user_status').html('User Status: ' + user_status);
+		} else if (response.status == "connected") {
+			user_status = 'connected';
+			user_auth = true;
+			$('#user_status').html('User Status: ' + user_status);
+			
+			check_fan_status(); // Since we've got permissions, check if they're a fan.
+		} else if (response.status == "unknown") {
+			user_status = 'unknown';
+			user_auth = false;
+			$('#user_status').html('User Status: ' + user_status);
+		}
+	});
+	
+	// This event is called when a like button is clicked.
+	FB.Event.subscribe('edge.create', function(response) {
+		$('#status').html('Like button click detected.');
+		check_fan_status();
+	});
+});
+</script>
