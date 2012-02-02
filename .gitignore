@@ -1,0 +1,13 @@
+## Generic Files to Ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+Thumbs.db
+
+## Other Folders / Files
+Template_Team
+Template_Team/*
+*.zip
+*.psd
