@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Like Meter Sample</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="like_meter.js"></script>
+	<script type="text/javascript">
+	$(document).ready( function () {
+		like_count({
+		    fbpage: 'wildfireinteractive', 
+		    element: 'like_amount', 
+		    meter: 'like_meter',
+		    starting: 0,
+		    goal: 200000
+		});
+	});
+	</script>
+	<style type="text/css">
+		#wrapper {
+			width:700px;
+			margin: 20px auto 40px;
+		}
+
+		#like_meter_wrap {
+			height:500px;
+			width:100px;
+			border:1px solid #333;
+			background:#EEE;
+			position: relative;
+		}
+
+		#like_meter {
+			width:100px;
+			position: absolute;
+			background:#006699;
+			bottom:0;
+			display: block;
+		}
+
+		#like_amount {
+			
+		}
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="like_meter_wrap">
+			<div id="like_meter"></div>
+		</div>
+		
+		<div id="like_amount"></div>
+	</div>
+</body>
+</html>
