@@ -1,0 +1,28 @@
+/*
+520px grid system ~ Core CSS.
+6 Columns ~ Gutter: 20px
+*/
+
+/* CLEARFIX */
+.clearfix:after, .row:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix, .row { display:inline-block; }
+.clearfix, .row { display:block; }
+
+/* GRID */
+.container { width:520px; margin:0 auto; }
+.row { position:relative; }
+
+.wf_1, .wf_2, .wf_3, .wf_4, .wf_5, .wf_6 { padding-left:20px; float:left; position:relative; }
+.wf_1 { width: 70px; }
+.wf_2 { width: 160px; }
+.wf_3 { width: 250px; }
+.wf_4 { width: 340px; }
+.wf_5 { width: 430px; }
+.wf_6 { width: 520px; }
+.row > div:first-child { padding-left:0; } /* Supported in IE7+ */
+
+/* CUSTOM */
+.container {
+	background:#FFF 0 0 repeat;
+	margin-bottom:20px;
+}

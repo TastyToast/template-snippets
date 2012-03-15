@@ -1,0 +1,9 @@
+/* Load Structural Styles Only */
+@import url(http://code.jquery.com/mobile/1.0.1/jquery.mobile.structure-1.0.1.min.css);
+
+/* If you create a custom swatch in the ThemeRoller, you can past it here or just start digging in to your design. */
+
+/* Global */
+.ui-header .ui-title {
+	margin: .6em 50px .8em;
+}

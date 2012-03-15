@@ -1,0 +1,36 @@
+<!-- Sample Page: -->
+<div data-role="page" id="home">
+	<div data-role="header">
+		<!-- Title Bar -->
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<!-- Main Content Area -->
+	</div><!-- /content -->
+</div><!-- /page -->
+
+<script type="text/javascript">
+$(document).ready( function () {
+	
+	var cnts = $('.consumer').html();
+	$('.consumer').replaceWith(cnts);
+	
+	if (!$('script[src="http://ajax.aspnetcdn.com/ajax/jquery.mobile/1.0.1/jquery.mobile-1.0.1.min.js"]').length) {
+		var oHead = document.getElementsByTagName('HEAD').item(0);
+		var oScript= document.createElement("script");
+		oScript.type = "text/javascript";
+		oScript.src = "http://ajax.aspnetcdn.com/ajax/jquery.mobile/1.0.1/jquery.mobile-1.0.1.min.js";
+		oHead.appendChild(oScript);
+	};
+});
+
+$(document).bind('mobileinit', function () {
+	$.mobile.ajaxEnabled = false;
+	$.mobile.loadingMessage = false;
+});
+
+// If signup form is used
+$(window).load( function () {
+  $('.my_form .screen').replaceWith($('.engagements_error_template'));
+});
+</script>
