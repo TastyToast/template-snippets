@@ -6,6 +6,9 @@ This repository contains various examples of code snippets to be used in the cre
 *All Channel Fan Gate*  
 Our traditional fan gate is only available on Facebook tabs but you can use these code samples to extend the same functionality across a canvas page or microsite. This method does require you get permission from the user to check their likes.  
 
+*Canvas Redirect*  
+This simple snippet can be included in a template to set an automatic redirect to a fanpage upon load.
+
 *FB Autofill*   
 Paste in and configure to add Autofill with Facebook functionality to any signup form or sweepstakes.
 
